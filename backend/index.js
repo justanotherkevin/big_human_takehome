@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// basic express
+// basic express setup
 const app = express();
 const port = process.env.PORT || 5000;
 // db config
@@ -13,7 +13,7 @@ mongoose
   .then(() => console.log('mongodb connected!!'))
   .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.send('working routes'));
+// app.get('/', (req, res) => res.send('working routes'));
 
 app.use('/api/users', users);
 
