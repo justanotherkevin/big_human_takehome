@@ -4,6 +4,7 @@ import Home from './pages/home'
 import About from './pages/about'
 import Landing from './pages/landing'
 import Plant from './pages/plant';
+import Authorization from './pages/authorization';
 import Register from './components/auth/Register';
 
 import './App.scss';
@@ -40,7 +41,8 @@ class App extends Component {
 
         <main>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
+          {/* <Route exact path="/register" component={Register} /> */}
+          <Route exact path="/auth" component={Authorization} />
           <Route exact path="/plants/:id" component={Plant} />
 
           <Route exact path="/about-us" component={About} />

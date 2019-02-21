@@ -13,17 +13,18 @@ export class plant extends Component {
     this.props.getPlant(urlParams);
   }
   render() {
-    const { plant } = this.props;
+    const { plant, isAuthed } = this.props;
     return (
       <div>
-        {plant && <Plant showComments={true} plant={plant} />}
+        {plant && <Plant showComments={isAuthed} plant={plant} />}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ plantState }) => ({
-  plant: plantState.plant
+const mapStateToProps = ({ plantState, authState }) => ({
+  plant: plantState.plant,
+  isAuthed: authState.isAuthenticated,
 })
 
 const mapDispatchToProps = {

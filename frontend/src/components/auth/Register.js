@@ -52,17 +52,17 @@ class Register extends Component {
                 name="name"
                 placeholder="name"
                 onChange={this.onChange} />
-              {errors && <span className="in-valid muted">{errors.password}</span>}
-              <input
-                type="password"
-                name="password"
-                placeholder="password"
-                onChange={this.onChange} />
               {errors && <span className="in-valid muted">{errors.email}</span>}
               <input
                 type="text"
                 name="email"
                 placeholder="email address"
+                onChange={this.onChange} />
+              {errors && <span className="in-valid muted">{errors.password}</span>}
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
                 onChange={this.onChange} />
               <button>create</button>
               {/* <p className="muted">Already registered? <a href="#">Sign In</a></p> */}

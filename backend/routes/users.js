@@ -4,9 +4,10 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-
+const keys = require('../config/secrets');
 // Load validation 
 const validateRegisterInput = require('../validation/register');
+const validateLoginInput = require('../validation/login');
 // Load User model
 const User = require('../models/User');
 
@@ -17,7 +18,7 @@ router.get('/all', (req, res) => {
   User.find()
     .sort({ date: -1 })
     .then(users => res.json(users))
-    .catch(err => res.status(404).json({ nousersfound: 'No posts found' }));
+    .catch(err => res.status(404).json({ err: 'No user found' }));
 });
 
 // @route   GET api/users/register
@@ -54,4 +55,53 @@ router.post('/register', (req, res) => {
     }
   });
 });
+/************
+@route   GET api/users / login
+@desc    Login User / Returning JWT Token
+@access  Public
+*************/
+router.post('/login', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+  const { email, password } = req.body;
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  // Find user by email
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
+    }
+
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // Create JWT Payload
+        const payload = {
+          id: user.id,
+          name: user.name,
+          avatar: user.avatar
+        };
+        // Sign Token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 3600 }, // user will be signed out after 1 hr. token need to start off as 'Bearer ' +
+          (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token // bearer is a type of proto-call
+            });
+          }
+        );
+      } else {
+        errors.password = "Password incorrect";
+        return res.status(400).json(errors);
+      }
+    });
+  });
+});
+
+
 module.exports = router;

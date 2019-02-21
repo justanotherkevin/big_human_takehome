@@ -9,7 +9,6 @@ Plant.propTypes = {
 
 function Plant(props) {
   const { plant, showComments } = props;
-  let commentContainer
   return (
     <div className='plant-wrapper'>
       <Link to={`/plants/${plant._id}`}>
@@ -28,8 +27,6 @@ function Plant(props) {
     </div>
   )
 }
-
-
 
 export default Plant
 

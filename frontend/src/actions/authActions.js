@@ -15,8 +15,6 @@ const setAuthToken = token => {
 
 // REGISTER USER
 export const registerUser = (userData, history) => dispatch => {
-  console.log(userData);
-
   axios
     .post('/api/users/register', userData)
     .then(res => history.push('/'))
@@ -29,27 +27,28 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login - get uer token
-// this is going to set the token into localstorage, then user the token in localstorage to call into private routes
-// export const loginUser = userData => dispatch => {
-//   axios
-//     .post('/api/users/login', userData)
-//     .then(res => {
-//       console.log(res);
-//       const { token } = res.data;
-//       localStorage.setItem('jwtToken', token);
-//       // token need to be decoded before use
-//       setAuthToken(token);
-//       const decoded = jwt_decode(token);
-//       dispatch(setCurrentUser(decoded));
-//     })
-//     .catch(err => {
-//       console.log('thisis error', err);
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       });
-//     });
-// };
+// get signed token; set token to header for private route
+export const loginUser = userData => dispatch => {
+  axios
+    .post('/api/users/login', userData)
+    .then(res => {
+      const { token } = res.data;
+      localStorage.setItem('jwtToken', token);
+      setAuthToken(token);
+      // decode token with jwt_decode
+      const decoded = jwt_decode(token);
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: decoded
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
 // set logged in user
 // export const setCurrentUser = decoded => {
 //   return {

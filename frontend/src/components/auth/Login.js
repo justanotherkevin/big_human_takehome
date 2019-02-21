@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
-import TextFieldGroup from '../common/TextFieldGroup';
 
 class Login extends Component {
   constructor() {
@@ -26,51 +25,43 @@ class Login extends Component {
   };
   componentDidMount() {
     // if user is isAuthenticated then redirect user to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
+    // if (this.props.auth.isAuthenticated) {
+    //   this.props.history.push('/dashboard');
+    // }
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
+    // if (nextProps.auth.isAuthenticated) {
+    //   this.props.history.push('/');
+    // }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
   render() {
-    const { errors } = this.state;
+    const { errors } = this.state
     return (
-      <div className="login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">
-                Sign in to your DevConnector account
-              </p>
-
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="Email Address"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                />
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
-            </div>
+      <div className="register-wrapper">
+        <div className="register-container">
+          <h1 className="">Sign in</h1>
+          <p className="">
+            Log into your account
+          </p>
+          <div className="form">
+            <form className="register-form" onSubmit={this.onSubmit}>
+              {errors && <span className="in-valid muted">{errors.email}</span>}
+              <input
+                type="text"
+                name="email"
+                placeholder="email address"
+                onChange={this.onChange} />
+              {errors && <span className="in-valid muted">{errors.password}</span>}
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                onChange={this.onChange} />
+              <button>create</button>
+            </form>
           </div>
         </div>
       </div>
@@ -78,14 +69,13 @@ class Login extends Component {
   }
 }
 Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  // loginUser: PropTypes.func.isRequired,
+  // auth: PropTypes.object.isRequired,
+  // errors: PropTypes.object.isRequired
 };
-const mapStateToProps = state => ({
-  // state.auth come from combineReducers @ index.js reducer
-  auth: state.auth,
-  errors: state.errors
+const mapStateToProps = ({ errorsState }) => ({
+  // auth: state.auth,
+  errors: errorsState
 });
 export default connect(
   mapStateToProps,
