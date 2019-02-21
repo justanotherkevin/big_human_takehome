@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "npm run dev --prefix backend",
+    "server-install": "npm i --prefix backend",
+    "client": "npm run dev --prefix frontend",
+    "client-install": "npm i --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "Kevin Hu",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
 }
