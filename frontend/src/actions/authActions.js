@@ -15,9 +15,11 @@ const setAuthToken = token => {
 
 // REGISTER USER
 export const registerUser = (userData, history) => dispatch => {
+  console.log(userData);
+
   axios
     .post('/api/users/register', userData)
-    .then(res => history.push('/login'))
+    .then(res => history.push('/'))
     .catch(err => {
       dispatch({
         type: GET_ERRORS,

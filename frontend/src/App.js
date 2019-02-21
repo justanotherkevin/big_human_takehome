@@ -42,7 +42,7 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/plants/:id" component={Plant} />
-          {/* <Route exact path="/" component={Home} /> */}
+
           <Route exact path="/about-us" component={About} />
         </main>
       </div>
