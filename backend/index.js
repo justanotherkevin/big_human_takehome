@@ -9,7 +9,7 @@ const { mongoURI } = require('./config/secrets');
 const users = require('./routes/users');
 // Connect to MongoDB
 mongoose
-  .connect(mongoURI, { useNewUrlParser: true })
+  .connect(mongoURI)
   .then(() => console.log('mongodb connected!!'))
   .catch(err => console.log(err));
 
