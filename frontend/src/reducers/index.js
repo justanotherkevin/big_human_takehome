@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import plants from './plantsReducer';
+import plantState from './plantsReducer';
 
 export default combineReducers({
-  plants
+  plantState
 });

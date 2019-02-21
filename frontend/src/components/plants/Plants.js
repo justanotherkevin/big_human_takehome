@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getPlants } from '../../actions/plantsActions';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getPlants } from '../../actions/plantsActions';
 import Plant from './Plant';
 
 class Plants extends Component {
@@ -19,7 +19,7 @@ class Plants extends Component {
     let plantsContainer
     if (plants !== null) {
       plantsContainer = plants.map(plant => (
-        <Plant plant={plant} showComments={false} />
+        <Plant key={plant._id} plant={plant} showComments={false} />
       ))
     } else {
       plantsContainer = <span>loading</span>
@@ -32,8 +32,8 @@ class Plants extends Component {
   }
 }
 
-const mapStateToProps = ({ plants }) => (
-  { ...plants }
+const mapStateToProps = ({ plantState }) => (
+  { plants: plantState.plants }
 )
 
 

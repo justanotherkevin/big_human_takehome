@@ -1,15 +1,20 @@
 .plants {
   .plant-wrapper {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-    img {
-      width: 100%;
+    img{
       border-left: 10px solid lightgreen;
     }
-    h3 , p {
-      text-align: left;
-      padding-left: 20px;
-    }
+  }
+}
+
+.plant-wrapper {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  h3 , p {
+    text-align: left;
+    padding-left: 20px;
+  }
+  img {
+    width: 100%;
   }
 }
