@@ -9,11 +9,13 @@ import {
   decrementAsync
 } from '../modules/counter'
 
+// import { Plants } from '../components/Plants';
+
 const Home = props => (
   <div>
     <h1>Home</h1>
     <p>Count: {props.count}</p>
-
+    {/* <Plants /> */}
     <p>
       <button onClick={props.increment}>Increment</button>
       <button onClick={props.incrementAsync} disabled={props.isIncrementing}>Increment Async</button>

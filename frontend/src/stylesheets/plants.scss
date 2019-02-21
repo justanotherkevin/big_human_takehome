@@ -1,0 +1,15 @@
+.plants {
+  .plant-wrapper {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    img {
+      width: 100%;
+      border-left: 10px solid lightgreen;
+    }
+    h3 , p {
+      text-align: left;
+      padding-left: 20px;
+    }
+  }
+}
