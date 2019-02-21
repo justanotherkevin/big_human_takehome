@@ -1,8 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 // basic express setup
 const app = express();
 const port = process.env.PORT || 5000;
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // db config
 const { mongoURI } = require('./config/secrets');
 // import routes
