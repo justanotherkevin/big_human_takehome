@@ -7,15 +7,18 @@ const port = process.env.PORT || 5000;
 const { mongoURI } = require('./config/secrets');
 // import routes
 const users = require('./routes/users');
+const plants = require('./routes/plants');
 // Connect to MongoDB
 mongoose
-  .connect(mongoURI)
+  .connect(
+    mongoURI,
+    { useNewUrlParser: true }
+  )
   .then(() => console.log('mongodb connected!!'))
   .catch(err => console.log(err));
 
-// app.get('/', (req, res) => res.send('working routes'));
-
 app.use('/api/users', users);
+app.use('/api/plants', plants);
 
 app.listen(port, () =>
   console.log(`server running on http://localhost:${port}/`)

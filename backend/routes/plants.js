@@ -5,17 +5,15 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-// Load User model
-const User = require('../models/User');
+const Plant = require('../models/Plant');
 
-// @route   GET api/users/all
-// @desc    Get all users
+// @route   GET api/plants/all
+// @desc    Get all plants
 // @access  Public
 router.get('/all', (req, res) => {
-  User.find()
-    .sort({ date: -1 })
-    .then(users => res.json(users))
-    .catch(err => res.status(404).json({ nousersfound: 'No posts found' }));
+  Plant.find()
+    .then(plants => res.json(plants))
+    .catch(err => res.status(404).json({ error: 'Where all my pants go?' }));
 });
 
 module.exports = router;

@@ -40,7 +40,7 @@ const savePlantSeeds = plants => {
 
 const run = () => {
   mongoose
-    .connect(mongoURI)
+    .connect(mongoURI, { useNewUrlParser: true })
     .then(() => {
       savePlantSeeds(createPlantSeeds());
     })
