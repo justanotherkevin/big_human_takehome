@@ -15,5 +15,14 @@ router.get('/all', (req, res) => {
     .then(plants => res.json(plants))
     .catch(err => res.status(404).json({ error: 'Where all my pants go?' }));
 });
-
+// @route   GET api/plants/:id
+// @desc    Get plant by id
+// @access  Public
+router.get('/:id', (req, res) => {
+  Plant.findById(req.params.id)
+    .then(plant => res.json(plant))
+    .catch(err =>
+      res.status(404).json({ err: 'No plant found with that ID' })
+    );
+});
 module.exports = router;
