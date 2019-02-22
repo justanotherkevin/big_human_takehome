@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../assets/imgs/logo.png';
+import tree from '../assets/imgs/tree.svg';
+
 
 export default function Navbar() {
   return (
@@ -24,6 +26,12 @@ export default function Navbar() {
             <li>Thanks!</li>
           </ul>
         </div>
+      </div>
+      <div className="login-btn">
+        <Link to='/auth'>
+          {/* <img src={tree} class="yourCSSClass"></img> */}
+          Login
+        </Link>
       </div>
     </header>
   )

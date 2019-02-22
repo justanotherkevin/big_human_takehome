@@ -12,17 +12,17 @@ import Navbar from './components/Navbar';
 /*
 1) Implement a NodeJS / Express RESTful API that:
   authentication support(JWT or Sessions)
-  Login, Logout and Sign Up
+  // Login, Logout and Sign Up
 
   Provides CRUD support for following entities:
-    Users
-    Plants
+    // Users
+    // Plants
   Users can post comments on Plants
 
 2) Implement a React SPA that:
   Consumes the above Node RESTful server
   Provides authentication support
-    Login / Logout / Sign Up
+    // Login / Logout / Sign Up
     Posting comments is only allowed for logged in users
 
   Data Consumption
@@ -37,14 +37,13 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+
         <Navbar />
 
         <main>
           <Route exact path="/" component={Landing} />
-          {/* <Route exact path="/register" component={Register} /> */}
           <Route exact path="/auth" component={Authorization} />
           <Route exact path="/plants/:id" component={Plant} />
-
           <Route exact path="/about-us" component={About} />
         </main>
       </div>
