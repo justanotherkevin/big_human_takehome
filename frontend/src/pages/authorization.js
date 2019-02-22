@@ -6,12 +6,19 @@ export default class Authorization extends Component {
   state = {
     login: true
   }
+  onClick = e => {
+    e.preventDefault();
+    this.setState({ login: !this.state.login });
+  }
+
   render() {
+    const { login } = this.state;
     return (
       <div className="auth-page">
-        <Register />
-        <p className="muted">Already registered? <a href="#">Sign In</a></p>
-        <Login />
+        {login ? <Register /> : <Login />}
+
+        <p className="muted">{login ? 'Already' : 'Not'} registered? <a href="/" onClick={this.onClick} >Sign {login ? 'in' : 'up'} </a></p>
+
       </div>
     )
   }
