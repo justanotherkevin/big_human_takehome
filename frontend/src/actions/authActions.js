@@ -2,16 +2,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import axios from 'axios';
 // due to nature of api request being async... you use the thunk middleware
 import jwt_decode from 'jwt-decode';
-
-const setAuthToken = token => {
-  if (token) {
-    // apply to every request
-    axios.defaults.headers.common['Authorization'] = token;
-  } else {
-    // delete auth header 
-    delete axios.defaults.headers.common['Authorization'];
-  }
-}
+import { setAuthTokenToAxiosHeader } from '../helpers/authHelpers'
 
 // REGISTER USER
 export const registerUser = (userData, history) => dispatch => {
@@ -34,13 +25,12 @@ export const loginUser = userData => dispatch => {
     .then(res => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);
-      setAuthToken(token);
+      setAuthTokenToAxiosHeader(token);
       // decode token with jwt_decode
       const decoded = jwt_decode(token);
-      dispatch({
-        type: SET_CURRENT_USER,
-        payload: decoded
-      });
+      dispatch(
+        setCurrentUserActionObj(decoded)
+      );
     })
     .catch(err => {
       dispatch({
@@ -49,19 +39,17 @@ export const loginUser = userData => dispatch => {
       });
     });
 };
-// set logged in user
-// export const setCurrentUser = decoded => {
-//   return {
-//     type: SET_CURRENT_USER,
-//     payload: decoded
-//   };
-// };
 
 // log user out
-// export const logoutUser = () => dispatch => {
-//   localStorage.removeItem('jwtToken');
-//   //remove auth header from future request
-//   setAuthToken(false);
-//   // set current user to null which will set isAuthenticated to false
-//   dispatch(setCurrentUser(null));
-// };
+export const logoutUser = () => dispatch => {
+  localStorage.removeItem('jwtToken');
+  setAuthTokenToAxiosHeader(false);
+  dispatch(setCurrentUserActionObj(null))
+};
+
+export const setCurrentUserActionObj = payload => (
+  {
+    type: SET_CURRENT_USER,
+    payload: payload
+  }
+)

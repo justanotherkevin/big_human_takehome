@@ -7,8 +7,11 @@ import Plant from './pages/plant';
 import Authorization from './pages/authorization';
 import Register from './components/auth/Register';
 
+import { setCurrentUser } from './actions/authActions';
+
 import './App.scss';
 import Navbar from './components/Navbar';
+
 /*
 1) Implement a NodeJS / Express RESTful API that:
   authentication support(JWT or Sessions)
@@ -33,6 +36,7 @@ import Navbar from './components/Navbar';
   ! Refrain from using tools like Bootstrap or other component libraries 
   ? Flexbox is an ideal approach
 */
+
 class App extends Component {
   render() {
     return (
