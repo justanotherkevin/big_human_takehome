@@ -17,16 +17,18 @@ const target = document.querySelector('#root')
 // auto auth if jwtToken 
 // ? if token expired => delete token + logout
 if (localStorage.jwtToken) {
-  let decoded = jwt_decode(localStorage.jwtToken);
+  const decoded = jwt_decode(localStorage.jwtToken);
+  const currentTime = Date.now() / 1000;
+
   setAuthTokenToAxiosHeader(localStorage.jwtToken);
-  // decode then dispatch
   store.dispatch(
     setCurrentUserActionObj(decoded)
   )
 
-  const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
-    store.dispatch(logoutUser());
+    store.dispatch(
+      logoutUser()
+    );
     history.push('/auth')
   }
 }
