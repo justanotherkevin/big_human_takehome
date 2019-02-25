@@ -87,7 +87,7 @@ router.post('/login', (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 }, // user will be signed out after 1 hr. token need to start off as 'Bearer ' +
+          { expiresIn: 3600 * 5 }, // user will be signed out after 5 hr. token need to start off as 'Bearer ' +
           (err, token) => {
             res.json({
               success: true,
