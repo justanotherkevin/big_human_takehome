@@ -11,6 +11,8 @@ const PlantSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
       },
+      name: { type: String },
+      avatar: { type: String },
       text: {
         type: String,
         required: true

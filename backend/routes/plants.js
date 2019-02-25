@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 const Plant = require('../models/Plant');
+const validatePostInput = require('../validation/plants');
 
 // @route   GET api/plants/all
 // @desc    Get all plants
@@ -25,4 +26,44 @@ router.get('/:id', (req, res) => {
       res.status(404).json({ err: 'No plant found with that ID' })
     );
 });
+
+// @route   POST api/plants/comment/:id
+// @desc    Add comment to plant
+// @access  Private
+router.post(
+  '/comment/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePostInput(req.body);
+    console.log(isValid, errors);
+
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    console.log(req)
+    Plant.findById(req.params.id)
+      .then(plant => {
+        const newComment = {
+          text: req.body.text,
+          name: req.body.name,
+          avatar: req.body.avatar,
+          user: req.user.id
+        };
+        // plant.comments.push(newComment);
+        // plant.save().then(plant => res.json(plant));
+      })
+      .catch(err => res.status(404).json({ err: 'No plant found' }));
+  }
+);
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

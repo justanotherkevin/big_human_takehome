@@ -1,9 +1,15 @@
 .plants {
   .plant-wrapper {
-    img{
+
+     .img-link-wrapper {
       border-left: 10px solid lightgreen;
+      a, 
+      a img {
+        display: block;
+      }
     }
   }
+ 
 }
 
 .plant-wrapper {
@@ -16,5 +22,21 @@
   }
   img {
     width: 100%;
+  }
+
+  .comment-form-wrapper {
+    form {
+      text-align: left;
+      textarea {
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+    }
   }
 }
