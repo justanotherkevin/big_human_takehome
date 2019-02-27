@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 const Plant = require('../models/Plant');
-const validatePostInput = require('../validation/plants');
+const validatePostComment = require('../validation/plants');
 
 // @route   GET api/plants/all
 // @desc    Get all plants
@@ -34,14 +34,12 @@ router.post(
   '/comment/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
-    console.log(isValid, errors);
-
+    const { errors, isValid } = validatePostComment(req.body);
     // Check Validation
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    console.log(req)
+    console.log(req.user.id)
     Plant.findById(req.params.id)
       .then(plant => {
         const newComment = {
@@ -50,8 +48,8 @@ router.post(
           avatar: req.body.avatar,
           user: req.user.id
         };
-        // plant.comments.push(newComment);
-        // plant.save().then(plant => res.json(plant));
+        plant.comments.push(newComment);
+        plant.save().then(plant => res.json(plant));
       })
       .catch(err => res.status(404).json({ err: 'No plant found' }));
   }

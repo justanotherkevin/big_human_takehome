@@ -1,17 +1,17 @@
 const Validator = require('validator');
 const isEmpty = require('../helpers/is_empty');
 
-module.exports = function validatePostInput(data) {
+module.exports = function validatePostComment(data) {
   let errors = {};
 
   data.text = !isEmpty(data.text) ? data.text : '';
 
   if (!Validator.isLength(data.text, { min: 10, max: 300 })) {
-    errors.text = 'Post must be between 10 and 300 characters';
+    errors.postComment = 'Post must be between 10 and 300 characters';
   }
 
   if (Validator.isEmpty(data.text)) {
-    errors.text = 'Text field is required';
+    errors.postComment = 'Text field is required';
   }
 
   return {

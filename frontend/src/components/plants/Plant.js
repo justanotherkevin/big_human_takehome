@@ -51,9 +51,21 @@ class Plant extends React.Component {
                 type="text"
                 placeholder={`Ask about ${plant.name}`}
                 onChange={this.onChange} />
+              {this.props.errors && <span>{this.props.errors.postComment}</span>}
+              <button type='submit'>submit</button>
             </form>
           </div>
         }
+        <div className="comments-wrapper">
+          {plant.comments.length === 0
+            ? <span>Be the first comment!</span>
+            : plant.comments.map(comment => (
+              <div className="comment">
+                <p>{comment.text}</p>
+              </div>
+            ))
+          }
+        </div>
       </div>
     )
   }
@@ -68,7 +80,7 @@ Plant.propTypes = {
 const mapStateToProps = ({ errorsState, authState }) => ({
   // auth: state.auth,
   authState,
-  // errors: errorsState
+  errors: errorsState,
 });
 const mapDispatchToProps = {
   addComment
