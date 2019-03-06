@@ -54,18 +54,18 @@ class Plant extends React.Component {
               {this.props.errors && <span>{this.props.errors.postComment}</span>}
               <button type='submit'>submit</button>
             </form>
+            <div className="comments-wrapper">
+              {plant.comments.length === 0
+                ? <span>Be the first comment!</span>
+                : plant.comments.map(comment => (
+                  <div key={comment._id} className="comment">
+                    <p>{comment.text}</p>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         }
-        <div className="comments-wrapper">
-          {plant.comments.length === 0
-            ? <span>Be the first comment!</span>
-            : plant.comments.map(comment => (
-              <div className="comment">
-                <p>{comment.text}</p>
-              </div>
-            ))
-          }
-        </div>
       </div>
     )
   }

@@ -1,10 +1,18 @@
 .navbar-wrapper {
   display: flex;
   justify-content: space-between;
+  .link-container,
+  .nav-links-container {
+    flex: 1;
+  }
+  .company-name-container {
+    text-align: center;
+    flex: 2;
+  }
   img {
     width: 100px;
   }
-  .nav-links-wrapper {
+  .nav-links-container {
     display: inline-block;
   }
   .collection-one,
@@ -39,4 +47,5 @@
     //   transform: translateY( -65px);
     // }
   }
+
 }

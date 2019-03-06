@@ -44,7 +44,9 @@ export const loginUser = userData => dispatch => {
 export const logoutUser = () => dispatch => {
   localStorage.removeItem('jwtToken');
   setAuthTokenToAxiosHeader(false);
-  dispatch(setCurrentUserActionObj(null))
+  dispatch(
+    setCurrentUserActionObj(null)
+  )
 };
 
 export const setCurrentUserActionObj = payload => (
